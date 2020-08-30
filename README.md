@@ -7,9 +7,9 @@ Jag valde att lägga all kod i app.js då det inte var jättemycket kod att hål
 ## Krav 2: Frontend
 Jag valde att frångå REACT nör det kom till frontend för mitt projektarbete. Jag tog hjälp av många av samma teknikerna och verktygen som för APIt men även andra som tex EJS, google-charts och node-fetch mfl. Node-fetch använde jag för mina anrop till APIt. Främst då jag användt det tidigare och kännde igen mig i hur det används. Jag använde EJS för att slippa skapa många olika vyer som i princip gör samma sak. Exempelvis skapade jag tex error.ejs för att rapportera olika fel som kan komma upp. Exempelvis felmeddelanden som "not logged in", "wrong email" eller "wrong password" kunde jag skicka till error.ejs som "ritar ut" respektive fel.
 
-Jag använde mig också av socket.io för att "lyssna" och i realtid ta emot och uppdatera priset för mina aktier samt uppdatera min graf. Mer om det under nästa steg "Krav 3: Realtid".
+Jag använde mig också av socket.io för att "lyssna" och i realtid ta emot och uppdatera priset för mina aktier samt uppdatera min graf. Mer om detta under "Krav 3: Realtid".
 
-Istället för Rickshaw så valde jag att använda googles graflösning då jag jobbat med den förrut och gillar hur det fungerar. Själva upplägget var ganska snarlikt Rickshaw exemplet där socket.io "lyssnar" efter nya updates). När detta tas emot så ändas datat i grafen och den uppdateras.
+Istället för Rickshaw så valde jag att använda googles graflösning då jag jobbat med den förrut och gillar hur den fungerar. Själva upplägget är ganska snarlikt Rickshaw exemplet där socket.io "lyssnar" efter nya updates. När detta tas emot så ändas datat och grafen uppdateras.
 
 ## Krav 3: Realtid
 
