@@ -1,0 +1,20 @@
+{
+  "name": "nodeauthapi",
+  "version": "1.0.0",
+  "description": "JWT example",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app",
+    "stop": "taskkill -F -IM node.exe"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
+    "sqlite3": "^4.1.1"
+  }
+}
