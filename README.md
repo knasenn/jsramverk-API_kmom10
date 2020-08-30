@@ -1,13 +1,16 @@
-# Node.js jsonwebtoken Example
+## Krav 1: Backend
+Jag valde att skapa APIt med hjälp av tekniker och verktyg som tex node, express och SQLite. Jag valde bort mongoDB då jag kännde mig mer bekväm med SQLite. När det kom till själva databasen så sparas information som namn, email, lösen men även info om hur mycket pengar användaren har och hur många "aktier" som denna äger. All data sparades rakt upp och ner DVS jag använde mig inte av tex bcrypt för att hasha lösenordet, mest för att jag är under tidspess. Jag tog hjälp av body-parser för att skicka tillbaka JSON responsen.
 
-> An example of how to protect routes and get a token
+Jag använde mig av Jasonwebtokens för att skydda vissa routes. Vilket sker genom att användaren skriver in email och lösenord som skickas till APIt. Dessa kontrolleras i databasen och om lösen och email stämmer så skapas det en token med hjälp användardata samt en hemlig fras. Denna token skickas tillbaka till användaren som lagrar den i minnet. Hemliga frasen vart för mitt projekt bara "secretkey" och ligger med direkt i koden. Dock vill man helst ha en lång och komplicerad nyckel samt lägga den i en separat fil som inte skickas med när man pushar till github. Jag brukar använda dotEnv men hoppade det för detta projekt. När användaren vill komma åt en viss "route" som är skyddad så skickas den lagrade tokenen med till backend där den verifieras tillsammans med samma hemliga fras. För att slippa repetara kod löstes verifieringen med hjälp av middleware som körs emellan. Om tokenen stämmer så skickas användaren "vidare". I annat fall returneras det ett felmeddealande.
+Jag valde att lägga all kod i app.js då det inte var jättemycket kod att hålla reda på samt återigen att jag har tidsbrist. Annars hade jag nog valt att skapa en model-mapp där jag lägger koden som tex. skriver, hämtar och updaterar i databasen. Hade jag hunnit snygga till det ytterligare hade jag även delat upp och grupperat mina routes. Det som sker i APIt utöver inloggningen och registreringen är främst hämtning och updatering av användarens saldo eller aktier osv.
 
-## Quick Start
+## Krav 2: Frontend
+Jag valde att frångå REACT nör det kom till frontend för mitt projektarbete. Jag tog hjälp av många av samma teknikerna och verktygen som för APIt men även andra som tex EJS, google-charts och node-fetch mfl. Node-fetch använde jag för mina anrop till APIt. Främst då jag användt det tidigare och kännde igen mig i hur det används. Jag använde EJS för att slippa skapa många olika vyer som i princip gör samma sak. Exempelvis skapade jag tex error.ejs för att rapportera olika fel som kan komma upp. Exempelvis felmeddelanden som "not logged in", "wrong email" eller "wrong password" kunde jag skicka till error.ejs som "ritar ut" respektive fel.
 
-``` bash
-# Install dependencies
-npm install
+Jag använde mig också av socket.io för att "lyssna" och i realtid ta emot och uppdatera priset för mina aktier samt uppdatera min graf. Mer om det under nästa steg "Krav 3: Realtid".
 
-# Serve on localhost:3000
-npm start
-```
+Istället för Rickshaw så valde jag att använda googles graflösning då jag jobbat med den förrut och gillar hur det fungerar. Själva upplägget var ganska snarlikt Rickshaw exemplet där socket.io "lyssnar" efter nya updates). När detta tas emot så ändas datat i grafen och den uppdateras.
+
+## Krav 3: Realtid
+
+Jag valde att skapa en egen server för realtids uppdateringen av aktiepriset. Verktyget som användes var socket.io som "lyssar" efter användare som kopplat upp sig. När någonting skickas ut så skickas det till alla användare som är "uppkopplade" till servern. Jag använde mig av setIntervall som skickar ut(io.emit) ett uppdaterat randomatiserat värde varje sekund.
